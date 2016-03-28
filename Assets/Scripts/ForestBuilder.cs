@@ -6,6 +6,7 @@ public class ForestBuilder : MonoBehaviour {
     public float GroundVertSpacing = 2f;
     public float TrunkRadiusMult = 0.3f;
     public float LeafDimpleMult = 0.7f;
+    public float TreeTaper = 0.5f;
     public float RockClusterMaxRadius = 3f;
 
     public Material GroundMaterial = null;
@@ -140,8 +141,12 @@ public class ForestBuilder : MonoBehaviour {
         // Build the leaves on each level. Treat the trunk as another level with a radius of the trunk radius.
         for (int level = 0; level < levels + 1; ++level) {
             for (int leaf = 0; leaf < leaves; ++leaf) {
-                float bottomRadius = (level == 0) ? radius * TrunkRadiusMult : radius; // trunk radius if at bottom
-                float topRadius = (level == levels) ? 0 : radius * TrunkRadiusMult; // close to a point if at top
+                float bottomRadius = (level == 0)
+                    ? radius * TrunkRadiusMult // trunk radius if at bottom
+                    : radius * (1f - TreeTaper * (level - 1) / levels); // taper toward the top
+                float topRadius = (level == levels)
+                    ? 0 // close to a point if at top
+                    : radius * TrunkRadiusMult;
 
                 // Add the quad verts for this leaf
                 AddTreeVerts(verts, vertIndex    , leaves, leaf, level       * levelHeight, bottomRadius);
