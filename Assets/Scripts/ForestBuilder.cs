@@ -127,11 +127,13 @@ public class ForestBuilder : MonoBehaviour {
         // Preallocate the mesh arrays
         Vector3[] verts = new Vector3[1 + (levels + 1) * leaves * 4 + levels * leaves * 4 + leaves * 2];
         int[] tris = new int[(levels * 2 + 1) * leaves * 6 + leaves * 3];
+        Vector2[] uvs = new Vector2[verts.Length];
         int vertIndex = 0;
         int triIndex = 0;
 
         // Bottom vertex
         verts[0] = Vector3.zero;
+        uvs[0] = new Vector2(0.75f, 0.25f); // trunk
         vertIndex = 1;
 
         // Build the leaves on each level. Treat the trunk as another level with a radius of the trunk radius.
@@ -151,6 +153,12 @@ public class ForestBuilder : MonoBehaviour {
                 tris[triIndex + 4] = vertIndex + 2;
                 tris[triIndex + 5] = vertIndex + 3;
                 triIndex += 6;
+
+                // Set UVs to leaf or trunk color
+                uvs[vertIndex    ] =
+                uvs[vertIndex + 1] =
+                uvs[vertIndex + 2] =
+                uvs[vertIndex + 3] = (level > 0) ? new Vector2(0.25f, 0.75f) : new Vector2(0.75f, 0.25f);
                 vertIndex += 4;
 
                 if (level > 0) {
@@ -165,6 +173,11 @@ public class ForestBuilder : MonoBehaviour {
                     tris[triIndex + 4] = vertIndex;
                     tris[triIndex + 5] = vertIndex + 1;
                     triIndex += 6;
+
+                    uvs[vertIndex    ] =
+                    uvs[vertIndex + 1] =
+                    uvs[vertIndex + 2] =
+                    uvs[vertIndex + 3] = new Vector2(0.25f, 0.75f); // leaf
                     vertIndex += 4;
                 } else {
                     // Create tree bottom
@@ -174,6 +187,9 @@ public class ForestBuilder : MonoBehaviour {
                     tris[triIndex + 1] = vertIndex + 1;
                     tris[triIndex + 2] = 0;
                     triIndex += 3;
+
+                    uvs[vertIndex    ] =
+                    uvs[vertIndex + 1] = new Vector2(0.75f, 0.25f); // trunk
                     vertIndex += 2;
                 }
             }
@@ -182,6 +198,7 @@ public class ForestBuilder : MonoBehaviour {
         Mesh mesh = new Mesh();
         mesh.vertices = verts;
         mesh.triangles = tris;
+        mesh.uv = uvs;
         mesh.RecalculateNormals();
 
         GameObject tree = new GameObject("Tree");

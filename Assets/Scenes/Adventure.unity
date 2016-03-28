@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotateAxis: 0
-  Speed: 30
+  Speed: 1
 --- !u!114 &400830371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +212,22 @@ Prefab:
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_FootstepSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_FootstepSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_JumpSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_LandSound
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
@@ -273,6 +289,7 @@ MonoBehaviour:
   GroundVertSpacing: 2
   TrunkRadiusMult: 0.3
   LeafDimpleMult: 0.7
+  RockClusterMaxRadius: 3
   GroundMaterial: {fileID: 2100000, guid: 3ce09676d4db640d788a06bcc0559291, type: 2}
   TreeMaterial: {fileID: 2100000, guid: 42c352e82f0b3443dac56af13942cbe0, type: 2}
   Rock: {fileID: 146128, guid: 58ee679bce7c54a7393f7a9adb522f76, type: 2}
