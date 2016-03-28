@@ -52,7 +52,8 @@ public class ForestBuilder : MonoBehaviour {
 
             PlaceObjectOnGround(rocks.transform,
                 position.x + Random.Range(0, TileSize),
-                position.z + Random.Range(0, TileSize));
+                position.z + Random.Range(0, TileSize),
+                0.5f);
         }
 
         // Maybe stick an animal or two in there too
