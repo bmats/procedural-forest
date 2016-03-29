@@ -268,7 +268,7 @@ public class ForestBuilder : MonoBehaviour {
         transform.rotation = Quaternion.FromToRotation(Vector3.up, GetGroundNormal(x, z));
     }
 
-    /// Use noise to generate a ground with bumps and hills.
+    /// Use a noise function to generate terrain with bumps and hills.
     public float GetGroundHeight(float x, float z) {
         return
             // Uneven ground

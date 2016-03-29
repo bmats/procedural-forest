@@ -1,16 +1,16 @@
 using UnityEngine;
 using System.Linq;
 
-[RequireComponent(typeof(Rigidbody))]
 /// A critter which moves around randomly. When the player approaches it, it stands still.
 /// When the player gets too close, it spooks and starts running away, knocking over things in its path.
+[RequireComponent(typeof(Rigidbody))]
 class Animal : MonoBehaviour {
     public float Speed = 10f;
     public float NoticeDistance = 15f;
     public float SpookDistance = 7f;
     public float SpookLength = 8f;
     public float SpookSpeed = 12f;
-    /// The tags that I will knock over
+    /// The tags of objects that I will knock over.
     public string[] SpookCollisionTags = null;
 
     private ForestBuilder _builder;
@@ -63,7 +63,7 @@ class Animal : MonoBehaviour {
     }
 
     private void Move() {
-        if (_direction.sqrMagnitude > 0) { // coast to a stop
+        if (_direction.sqrMagnitude > 0) { // don't stop abruptly
             _rigidbody.AddForce(
                 _direction * (_spooked ? SpookSpeed : Speed) * Time.deltaTime,
                 ForceMode.VelocityChange);
